@@ -18,5 +18,19 @@ Problem: Security risk
 
 Fix:
 ```python
+import time
 import os
 API_KEY = os.getenv("API_KEY")
+
+### Issue 2: No Rate Limiting
+Problem: Too many requests can overload API
+
+Fix:
+python
+import time
+
+for page in range(1, 101):
+    response = requests.get(API_URL, params={"page": page, "key": API_KEY})
+    data = response.json()
+    records.extend(data["results"])
+    time.sleep(1)
